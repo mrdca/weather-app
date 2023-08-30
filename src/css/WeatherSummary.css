@@ -1,0 +1,39 @@
+.weather-summary {
+  background-color: #b8cfda;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.weather-summary h3 {
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+}
+
+.weather-summary p {
+  margin: 5px 0;
+}
+
+.weather-summary p:last-child {
+  margin-bottom: 0;
+}
+
+.weather-summary .location-info {
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
+  margin-top: 10px;
+}
+
+.weather-summary .location-info p {
+  margin: 5px 0;
+}
+
+.recommendation-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.recommendation-icon img {
+  width: 40px;
+}
