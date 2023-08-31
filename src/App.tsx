@@ -20,6 +20,7 @@ interface Current {
 }
 
 export interface WeatherData {
+  [x: string]: any;
   location: Location;
   current: Current;
 }
@@ -28,6 +29,7 @@ const App: React.FC = () => {
   const [zipCode, setZipCode] = useState<string>('');
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [isValidZip, setIsValidZip] = useState(true);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleFetchWeatherData = async () => {
     try {
@@ -37,11 +39,17 @@ const App: React.FC = () => {
       }
 
       setIsValidZip(true);
+      setErrorMessage(null);
 
       const data: WeatherData = await fetchWeatherData(zipCode);
+      if (!data.current) {
+        setErrorMessage(data.error.info);
+        return;
+      }
       setWeatherData(data);
     } catch (error) {
       console.error('Error fetching weather data:', error);
+      setErrorMessage('An error occurred while fetching weather data.');
     }
   };
 
@@ -68,6 +76,11 @@ const App: React.FC = () => {
               </button>
             </div>
           </div>
+          {errorMessage && ( // Render error message if present
+            <div className="alert alert-danger" role="alert">
+              {errorMessage}
+            </div>
+          )}
           {weatherData && <WeatherInfo weatherData={weatherData} />}
         </div>
       </div>
